@@ -1,4 +1,4 @@
-FROM relativemedia-sails
+FROM relativemedia/sails
 MAINTAINER Mike DeVita <mike@relative.media>
 
 COPY . /app
