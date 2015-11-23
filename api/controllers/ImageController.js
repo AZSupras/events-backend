@@ -7,9 +7,9 @@ ImageController = {
 
     req.file('images').upload({
       adapter: require('skipper-s3'),
-      key: sails.config.connections.s3prod.key,
-      secret: sails.config.connections.s3prod.secret,
-      bucket: sails.config.connections.s3prod.bucket
+      key: sails.config.connections.s3.key,
+      secret: sails.config.connections.s3.secret,
+      bucket: sails.config.connections.s3.bucket
     }, function whenDone(err, files){
 
       if (err) {
