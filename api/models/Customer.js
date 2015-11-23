@@ -15,12 +15,10 @@ CustomerModel = {
       required: true
     },
     phone: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     username: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     /**
@@ -57,6 +55,15 @@ CustomerModel = {
     events: {
       collection: 'event',
       via: 'attendees'
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      return {
+        id: obj.id,
+        username: obj.username,
+        firstname: obj.firstname
+      };
     }
   }
 };
