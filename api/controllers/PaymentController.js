@@ -1,6 +1,6 @@
 /* global sails, Payment, Customer */
 var stripe = require('stripe')(sails.config.connections.stripe.keys.secret);
-
+var _      = require('lodash');
 
 /**
  * Payment Controller
@@ -66,7 +66,21 @@ PaymentController = {
       ];
     })
     .spread(function (customer, payment){
-      return res.json({ customer: customer, payment: payment });
+      var events = [];
+      _.each(checkout.cart.items, function (event) {
+        events.push(event.id);
+      });
+
+      Customer.update({ id: customer.id }, {
+        events: events
+      })
+      .then(function (customer) {
+        return res.json({ customer: customer, payment: payment });
+      })
+      .catch(function (err) {
+        sails.log.error(err);
+        return res.json(500, err);
+      });
     })
     .catch(function (err){
       if (err.type === 'StripeCardError') {
