@@ -21,6 +21,9 @@ module.exports = {
     connection: 'localdisk',
     migrate: 'alter'
   },
+  autoAdmin: {
+    enabled: true
+  },
   connections: {
     s3: {
       bucket: 'azsupras-events',
