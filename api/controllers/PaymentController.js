@@ -86,6 +86,7 @@ PaymentController = {
       if (err.type === 'StripeCardError') {
         return res.json(err.statusCode, { code: err.code, message: err.message });
       } else {
+        sails.log.error(err);
         return res.json(500, err);
       }
     });
