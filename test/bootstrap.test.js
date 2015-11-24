@@ -14,6 +14,24 @@ before(function (done) {
     connections: {
       localdisk: {
         adapter: 'sails-disk'
+      },
+      googleMaps: {
+        key: 'AIzaSyDfkvPmJAAXn759s-qohYB8ADMhPm5Hd5k'
+      },
+      s3: {
+        key: 'AKIAIVYYS7FBUAMC27NQ',
+        secret: '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'
+      },
+      mandrill: {
+        apiKey: '123456'
+      },
+      stripe: {
+        keys: {
+          secret: 'sk_test_ZYHWa9cCO9dWxps9IDDvosmA'
+        }
+      },
+      jwt: {
+        secret: 'ZsknTB%^i^eyZzsUI(&gj(u!'
       }
     },
     models: {
