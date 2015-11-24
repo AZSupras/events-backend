@@ -2,7 +2,23 @@
 var faker = require('faker');
 var request = require('supertest');
 
-describe.only('EventController', function (){
+describe('EventController', function (){
+
+
+  describe('create', function () {
+    it('given a valid token, it should create an event');
+    it('given a valid token and invalid data, it should not create an event');
+  });
+
+  describe('edit', function () {
+    it('given a valid token, it should edit an event');
+    it('given a valid token and invalid data, it should not edit an event');
+  });
+
+  describe('delete', function (){
+    it('given a valid token, it should delete an event');
+    it('given a valid token and invalid data, it should not delete an event');
+  });
 
   describe('find', function (){
     it('should return an array of events', function (done){
@@ -12,7 +28,9 @@ describe.only('EventController', function (){
       .set('Accept', 'application/json')
       .expect(200)
       .expect(function (res){
-        res.body.should.be.an.Array();
+        res.body.should.be.an.Object();
+        res.body.should.have.properties('results', 'meta');
+        res.body.results.should.be.an.Array();
       })
       .end(function (err){
         if (err){
