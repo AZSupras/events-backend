@@ -9,7 +9,7 @@ before(function (done) {
   // Lift Sails with test database
   Sails.lift({
     log: {
-      level: 'error'
+      level: 'debug'
     },
     connections: {
       localdisk: {
