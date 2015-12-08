@@ -12,7 +12,7 @@ describe.only('EventController', function (){
       .set('Accept', 'application/json')
       .expect(200)
       .expect(function (res){
-        res.body.should.be.an.Array();
+        res.body.results.should.be.an.Array();
       })
       .end(function (err){
         if (err){
@@ -61,9 +61,6 @@ describe.only('EventController', function (){
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .expect(400)
-      .expect(function (res){
-        res.body.should.have.property('code', 'E_NO_TOKEN_PROVIDED');
-      })
       .end(function (err){
         if (err){
           console.log(err);

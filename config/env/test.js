@@ -52,14 +52,6 @@ module.exports = {
       }
     }
   },
-  policies: {
-    EventController: {
-      '*': true
-    },
-    ImageController: {
-      '*': true
-    }
-  },
   contactForm: {
     toEmail: 'someemail@email.com'
   },
