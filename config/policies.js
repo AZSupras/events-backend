@@ -18,6 +18,11 @@
 
 
 module.exports.policies = {
+  AuthController: {
+    'login': true,
+    'logout': ['TokenPolicy']
+  },
+
   PaymentController: {
     '*': false,
     'process': true // public route for payment processing
