@@ -1,11 +1,24 @@
-/* globals sails */
-var faker = require('faker');
+/* globals sails, fixtures */
+var faker   = require('faker');
 var request = require('supertest');
-var should = require('should');
-var Utils = require('../../utils');
+var should  = require('should');
+var _       = require('lodash');
+var Utils   = require('../../utils');
+
+var cart    = {
+  items: []
+};
 
 describe('PaymentController', function (){
 
+  before(function (done) {
+    _.each(fixtures.event, function (event) {
+      cart.items.push({
+        id: event.id
+      });
+    });
+    done();
+  });
 
   describe('process', function (){
     it('given valid cc info, it should process the payment', function (done){
@@ -29,6 +42,7 @@ describe('PaymentController', function (){
               'phone': faker.phone.phoneNumber(),
               'username': faker.internet.userName()
           },
+          'cart': cart,
           'payment': {
               'amount': 1.57,
               'stripeToken': token

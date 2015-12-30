@@ -21,35 +21,25 @@ module.exports = {
     connection: 'localdisk',
     migrate: 'alter'
   },
+  autoAdmin: {
+    enabled: true
+  },
   connections: {
-
-    googleMaps: {
-      key: 'AIzaSyDfkvPmJAAXn759s-qohYB8ADMhPm5Hd5k'
-    },
-    jwt: {
-      secret: 'ZsknTB%^i^eyZzsUI(&gj(u!'
-    },
     s3: {
       bucket: 'azsupras-events',
-      region: 'us-west-1',
-      key: 'AKIAIVYYS7FBUAMC27NQ',
-      secret: 'PIVpO9+Whj2rfBC3t2Ecd9zBGmBr3yPkFHr6uTwh'
+      region: 'us-west-1'
     },
     mandrill: {
       fromEmail: 'noreply@example.com',
       fromName: 'Some Name',
-      subject: 'Subject Here',
-      apiKey: '123456'
+      subject: 'Subject Here'
     },
     localdisk: {
       adapter: 'sails-disk'
     },
     stripe: {
       currency: 'usd',
-      description: 'Arizona Supras',
-      keys: {
-        secret: 'sk_test_ZYHWa9cCO9dWxps9IDDvosmA'
-      }
+      description: 'Arizona Supras'
     }
   },
   contactForm: {
