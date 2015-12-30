@@ -3,7 +3,7 @@ var faker = require('faker');
 var request = require('supertest');
 
 
-describe.only('AuthController', function (){
+describe('AuthController', function (){
 
   describe('login', function (){
     it('should return a token and user object given valid credentials', function (done) {
