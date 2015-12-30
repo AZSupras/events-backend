@@ -6,8 +6,6 @@ AuthController = {
     var identity = req.param('identity');
     var password = req.param('password');
 
-    sails.log.debug(identity, password);
-
     if (!identity || !password){
       return res.json(401, { type: 'ERROR', category: 'E_INVALID_CREDENTIALS', msg: 'No username or password provided.'});
     }
@@ -16,9 +14,14 @@ AuthController = {
 
     User[findType](identity)
     .then(function (user){
+
+      if (!user) {
+        sails.log.error('invalid user', identity);
+        return res.json(401, {type: 'ERROR', statusCode: 401, code: 'E_INVALID_CREDENTIALS', msg: 'The provided credentials were invalid.'});
+      }
       User.validatePassword(password, user.password).then(function (valid){
         if (!valid){
-          sails.log.error('Password invalid for user', user.username, password);
+          sails.log.error('Password invalid for user', user.username);
           return res.json(401, {type: 'ERROR', statusCode: 401, code: 'E_INVALID_CREDENTIALS', msg: 'The provided credentials were invalid.'});
         }
 
@@ -44,11 +47,14 @@ AuthController = {
 
   logout: function (req, res) {
     var token = req.token;
-
     User.update(
       { accessToken: token },
       { accessToken: '' }
     ).then(function (user) {
+      if (user.length <= 0) {
+        return res.json(500, { msg: 'The provided token was invalid or malformed.', code: 'E_INVALID_TOKEN', type: 'ERROR', statusCode: 500 });
+      }
+
       res.json({ message: 'USER LOGGED OUT', type: 'E_INFO' });
     })
     .catch( function (err) {
