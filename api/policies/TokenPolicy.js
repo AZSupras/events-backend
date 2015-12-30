@@ -1,4 +1,4 @@
-/* global TokenService, User */
+/* global TokenService, User, sails */
 
 var _ = require('lodash');
 
@@ -67,6 +67,15 @@ module.exports = function (req, res, next) {
    */
   TokenService.verifyToken(token, {}, function (err, decodedToken){
     if (err){
+      sails.log.error({
+        policy: 'TokenPolicy::verifyToken',
+        statusCode: 500,
+        type: 'ERROR',
+        code: 'E_INVALID_TOKEN',
+        msg: 'The provided token was invalid or malformed.',
+        err: err
+      });
+
       return res.json(500, {
         statusCode: 500,
         type: 'ERROR',

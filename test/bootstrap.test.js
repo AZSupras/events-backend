@@ -8,6 +8,17 @@ require('should');
 before(function (done) {
   // Lift Sails with test database
   Sails.lift({
+    autoAdmin: {
+      enabled: true,
+      user: {
+        username: 'admin',
+        firstName: 'Super',
+        lastName: 'User',
+        email: 'admin@admin.com',
+        password: 'admin1234',
+        accessLevel: 3
+      }
+    },
     log: {
       level: 'error'
     },
