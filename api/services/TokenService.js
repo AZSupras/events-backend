@@ -43,7 +43,7 @@ TokenService = {
     return jwt.verify(
       token,
       sails.config.jwt.secret,
-      _.merge({}, sails.config.jwt.verificationOptions, options),
+      _.merge({}, sails.config.jwt.verificationOptions),
       cb
     );
   }
