@@ -77,7 +77,7 @@ EventModel = {
      */
     markdownContent: {
       type: 'string',
-      required: true
+      required: false
     },
 
     /**
@@ -167,9 +167,10 @@ EventModel = {
     /**
      * Parse out the markdown content into HTML
      **/
-    var content = marked(values.markdownContent);
-    values.content = content;
-
+    if (values.markdownContent) {
+      var content = marked(values.markdownContent);
+      values.content = content;
+    }
     /**
      * Create the static map image
      **/

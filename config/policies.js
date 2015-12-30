@@ -40,5 +40,9 @@ module.exports.policies = {
 
   CustomerController: {
     '*': false // block all routes to CustomerController for now
+  },
+
+  AuthController: {
+    'logout': ['TokenPolicy']
   }
 };

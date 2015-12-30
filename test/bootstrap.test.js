@@ -20,7 +20,7 @@ before(function (done) {
       }
     },
     log: {
-      level: 'error'
+      level: 'debug'
     },
     connections: {
       localdisk: {
