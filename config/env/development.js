@@ -18,13 +18,17 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'localdisk',
+    connection: 'mongodev',
     migrate: 'alter'
   },
   autoAdmin: {
     enabled: true
   },
   connections: {
+    mongodev: {
+      adapter: 'sails-mongo',
+      database: 'events_dev'
+    },
     s3: {
       bucket: 'azsupras-events',
       region: 'us-west-1'

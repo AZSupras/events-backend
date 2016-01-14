@@ -151,8 +151,8 @@ EventModel = {
       Associations
     */
     attendees: {
-      collection: 'customer',
-      via: 'events'
+      collection: 'payment',
+      via: 'event'
     },
     coverImage: {
       model: 'image'
