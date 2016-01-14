@@ -6,8 +6,30 @@ PaymentModel = {
       type: 'ip',
       required: true
     },
+    email: {
+      type: 'email',
+      required: true
+    },
+    firstname: {
+      type: 'string',
+      required: true
+    },
+    lastname: {
+      type: 'string',
+      required: true
+    },
+    phone: {
+      type: 'string'
+    },
+    username: {
+      type: 'string'
+    },
     transaction: {
       type: 'json'
+    },
+    paymentType: {
+      type: 'string',
+      defaultsTo: 'web'
     },
     amount: {
       type: 'float',
@@ -21,8 +43,19 @@ PaymentModel = {
       type: 'boolean',
       defaultsTo: false
     },
-    customer: {
-      model: 'customer'
+    emailSent: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    /**
+     * Associations
+     */
+    event: {
+      model: 'event'
+    },
+    user: {
+      model: 'user'
     }
   }
 };

@@ -25,5 +25,6 @@
 
 module.exports.blueprints = {
   shortcuts: false,
+  actions: false,
   prefix: '/v1'
 };

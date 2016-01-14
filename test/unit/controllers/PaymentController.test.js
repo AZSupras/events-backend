@@ -62,8 +62,10 @@ describe('PaymentController', function (){
         })
         .end(function (err){
           if (err){
+            console.error(err);
             return done(err);
           }
+
           done();
         });
       });

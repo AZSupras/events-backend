@@ -28,54 +28,44 @@ PaymentController = {
     var checkout = req.body;
 
     // create an attendee
-    Customer.create({
+    Payment.create({
+      ip: req.connection.remoteAddress,
+      amount: parseFloat(checkout.payment.amount) * 100,
+      currency: sails.config.connections.stripe.currency,
       email: checkout.attendee.email,
       firstname: checkout.attendee.firstname,
       lastname: checkout.attendee.lastname,
       phone: checkout.attendee.phone,
       username: checkout.attendee.username
-    }).then(function (customer){
+    }).then(function (payment){
 
       // charge the card
       return [
-        customer,
+        payment,
         stripe.charges.create({
           amount: parseFloat(checkout.payment.amount) * 100,
           currency: sails.config.connections.stripe.currency,
           source: checkout.payment.stripeToken,
           description: sails.config.connections.stripe.description,
           metadata: {
-            username: customer.username,
-            email: customer.email
+            username: payment.username,
+            email: payment.email
           }
         })
       ];
     })
-    .spread(function (customer, charge){
-      // create a payment record
-      return [
-        customer,
-        Payment.create({
-          ip: req.connection.remoteAddress,
-          transaction: charge,
-          currency: charge.currency,
-          amount: charge.amount / 100,
-          paid: charge.paid,
-          customer: customer.id
-        })
-      ];
-    })
-    .spread(function (customer, payment){
-      var events = [];
-      _.each(checkout.cart.items, function (event) {
-        events.push(event.id);
-      });
-
-      Customer.update({ id: customer.id }, {
-        events: events
+    .spread(function (payment, charge){
+      var eventId = checkout.cart.items[0].id;
+      Payment.update({ id: payment.id }, {
+        transaction: charge,
+        currency: charge.currency,
+        amount: charge.amount / 100,
+        paid: charge.paid,
+        event: eventId
+        // @todo add in user level associations
       })
-      .then(function (customer) {
-        return res.json({ customer: customer, payment: payment });
+      .then(function (payment) {
+        return res.json({ payment: payment[0] });
       })
       .catch(function (err) {
         sails.log.error(err);
