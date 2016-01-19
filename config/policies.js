@@ -44,5 +44,9 @@ module.exports.policies = {
 
   AuthController: {
     'logout': ['TokenPolicy']
+  },
+
+  VersionController: {
+    '*': true
   }
 };
