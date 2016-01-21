@@ -26,7 +26,7 @@ module.exports.cron = {
       })
       .then(function (customers) {
         if (customers.length <= 0) {
-          return sails.log.debug('Email Cron Job Finished, no emails to send.');
+          return sails.log.debug('[' + new Date() + ']', 'Email Cron Job Finished, no emails to send.');
         } else {
           async.each(customers, function (customer, eachCb) {
             sails.hooks.email.send('paymentReceipt', customer, {
@@ -38,7 +38,7 @@ module.exports.cron = {
               }
               Payment.update({ id: customer.id }, { emailSent: true })
               .then(function () {
-                sails.log.debug('paymentReceipt sent for', customer.email, customer.id);
+                sails.log.debug('[' + new Date() + ']', 'paymentReceipt sent for', customer.email, customer.id);
                 eachCb();
               });
             });
@@ -51,7 +51,7 @@ module.exports.cron = {
       });
     },
     onComplete: function () {
-      sails.log.debug('Email Cron Job Finished');
+      sails.log.debug('[' + new Date() + ']', 'Email Cron Job Finished');
     }
   }
 };
