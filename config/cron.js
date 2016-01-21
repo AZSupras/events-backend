@@ -4,7 +4,7 @@ var async = require('async');
 
 module.exports.cron = {
   emailJob: {
-    schedule: '* */5 * * * *',
+    schedule: '0 */5 * * * *', // run every 5 minutes
     onTick: function () {
       return Payment.find({ emailSent: false, paid: true })
       .then(function (payments) {
@@ -46,10 +46,12 @@ module.exports.cron = {
             if (err) {
               sails.log.error(err);
             }
-            sails.log.debug('Email Cron Job Finished');
           });
         }
       });
+    },
+    onComplete: function () {
+      sails.log.debug('Email Cron Job Finished');
     }
   }
 };
