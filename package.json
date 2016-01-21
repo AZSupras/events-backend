@@ -1,10 +1,11 @@
 {
   "name": "azsupras-events-backend",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "async": "^1.5.2",
     "bcryptjs": "^2.3.0",
     "bluebird": "^3.0.5",
     "ejs": "~0.8.4",
@@ -19,6 +20,8 @@
     "rc": "~0.5.0",
     "request": "^2.65.0",
     "sails": "~0.11.2",
+    "sails-hook-cron": "^2.1.1",
+    "sails-hook-email": "^0.12.1",
     "sails-mongo": "^0.11.4",
     "skipper-s3": "^0.5.6",
     "stripe": "^4.0.0"
