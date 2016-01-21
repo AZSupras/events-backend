@@ -36,6 +36,7 @@ PaymentController = {
       firstname: checkout.attendee.firstname,
       lastname: checkout.attendee.lastname,
       phone: checkout.attendee.phone,
+      cart: checkout.cart,
       username: checkout.attendee.username
     }).then(function (payment){
 

@@ -31,6 +31,9 @@ PaymentModel = {
       type: 'string',
       defaultsTo: 'web'
     },
+    cart: {
+      type: 'json'
+    },
     amount: {
       type: 'float',
       required: true
