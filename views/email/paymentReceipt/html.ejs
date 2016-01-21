@@ -1,0 +1,39 @@
+<img src="https://events.azsupras.com/images/logo.png">
+<p style="padding:20px; background-color:#EFEFEF; border: 1px sold #E3E3E3;text-align:center;">Thanks for paying early for an AZSupras Event. Below you'll find your payment receipt. Please print or show this at the entrance to get a wristband</p>
+
+<ul style="padding:0; margin: 0;">
+  <li style="list-style: none;"><strong>First Name: </strong><%= firstname %></li>
+  <li style="list-style: none;"><strong>Last Name: </strong><%= lastname %></li>
+  <li style="list-style: none;"><strong>Phone Number: </strong><%= phone %></li>
+  <li style="list-style: none;"><strong>Forum Username: </strong><%= username %></li>
+  <li style="list-style: none;"><strong>Email Address: </strong><%= email %></li>
+</ul>
+<hr>
+
+<% if(cart) { %>
+<table style="width:100%">
+  <thead style="background-color:#E3E3E3">
+    <tr>
+      <th>Item Name</th>
+      <th>Item Qty</th>
+      <th>Unit Cost</th>
+      <th>Item Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cart.items[0].items.forEach(function (cartItem) { %>
+      <tr>
+        <td><%= cartItem.name %></td>
+        <td><%= cartItem.qty %></td>
+        <td><%= cartItem.unitCost %></td>
+        <td><%= cartItem.itemCost %></td>
+      </tr>
+    <% }); %>
+  </tbody>
+  <tbody>
+    <tr style="background-color: #333333; color: #efefef;">
+      <td colspan="4" style="text-align: right;"><strong>Total Cost: </strong><%= cart.totalCost %></td>
+    </tr>
+  </tbody>
+</table>
+<% } %>
